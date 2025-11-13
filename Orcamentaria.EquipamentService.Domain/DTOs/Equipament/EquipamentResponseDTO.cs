@@ -10,7 +10,7 @@ namespace Orcamentaria.EquipamentService.Domain.DTOs.Equipament
         public string? Description { get; set; }
         public string Manufacturer { get; set; }
         public MaintenancePeriodEnum MaintenancePeriod { get; set; }
-        public EquipamentType Type { get; set; }
+        public EquipamentTypeResponseDTO Type { get; set; }
         public bool Active { get; set; }
         public DateTime CreatedAt { get; set; }
         public long CreatedBy { get; set; }

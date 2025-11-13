@@ -5,7 +5,7 @@ using Orcamentaria.EquipamentService.Domain.Repositories;
 using Orcamentaria.EquipamentService.Domain.Services;
 using Orcamentaria.Lib.Domain.Validators;
 
-namespace Orcamentaria.PersonService.Application.Validators
+namespace Orcamentaria.EquipamentService.Application.Validators
 {
     public class EquipamentMaintenanceValidator : AbstractValidator<EquipamentMaintenance>, IValidatorEntity<EquipamentMaintenance>
     {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection.Extensions;
 using Orcamentaria.EquipamentService.Application.Services;
+using Orcamentaria.EquipamentService.Application.Validators;
 using Orcamentaria.EquipamentService.Domain.Mappers;
 using Orcamentaria.EquipamentService.Domain.Models;
 using Orcamentaria.EquipamentService.Domain.Repositories;
@@ -7,8 +8,7 @@ using Orcamentaria.EquipamentService.Domain.Services;
 using Orcamentaria.EquipamentService.Infrastructure.Contexts;
 using Orcamentaria.EquipamentService.Infrastructure.Repositories;
 using Orcamentaria.Lib.Domain.Validators;
-using Orcamentaria.Lib.Infrastructure;
-using Orcamentaria.PersonService.Application.Validators;
+using Orcamentaria.Lib.Infrastructure.Configures;
 
 namespace Orcamentaria.EquipamentService.API
 {
@@ -25,20 +25,19 @@ namespace Orcamentaria.EquipamentService.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            Configuration = CommonDI.ResolveConfigs(_serviceName, services, Configuration);
+            Configuration = services.ResolveConfigs(Configuration, _serviceName);
+
             services.Replace(ServiceDescriptor.Singleton(Configuration));
 
-            CommonDI.AddServiceRegistryHosted(services, Configuration);
+            services.AddServiceRegistryHosted(Configuration);
 
-            CommonDI.ResolveCommonServicesWithMySql<MySqlContext>(
+            services.ResolveCommonServicesWithMySql<MySqlContext>(configuration: Configuration,
                 serviceName: _serviceName,
                 apiVersion: _apiVersion,
-                services: services,
-                configuration: Configuration,
                 customServices: () =>
                 {
                     //Mappers
-                    services.AddAutoMapper(
+                    services.AddAutoMapper(_ => { },
                         typeof(EquipamentMapper),
                         typeof(EquipamentTypeMapper),
                         typeof(EquipamentMaintenanceMapper));
@@ -61,6 +60,6 @@ namespace Orcamentaria.EquipamentService.API
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-			=> CommonDI.ConfigureCommon(_serviceName, _apiVersion, app, env);
+            => app.ConfigureCommon(env, _serviceName, _apiVersion);
     }
 }
