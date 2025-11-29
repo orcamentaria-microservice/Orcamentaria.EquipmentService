@@ -1,0 +1,48 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orcamentaria.EquipmentService.API", "Orcamentaria.EquipmentService.API\Orcamentaria.EquipmentService.API.csproj", "{667BC5B1-2D4C-0FA0-5529-80E7D94675A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orcamentaria.EquipmentService.Application", "Orcamentaria.EquipmentService.Application\Orcamentaria.EquipmentService.Application.csproj", "{B0A4E1E8-495F-64BA-6AA2-1B1A7D4D3C80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orcamentaria.EquipmentService.Domain", "Orcamentaria.EquipmentService.Domain\Orcamentaria.EquipmentService.Domain.csproj", "{F646614B-C752-B29F-B1F1-0DB65175DF8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orcamentaria.EquipmentService.Infrastructure", "Orcamentaria.EquipmentService.Infrastructure\Orcamentaria.EquipmentService.Infrastructure.csproj", "{37045C42-5B93-4D41-CE54-B7EAAD1EDB0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orcamentaria.EquipmentService.Test", "Orcamentaria.EquipmentService.Test\Orcamentaria.EquipmentService.Test.csproj", "{290B8C22-55F2-7BCD-902B-A841C5AA6066}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{667BC5B1-2D4C-0FA0-5529-80E7D94675A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{667BC5B1-2D4C-0FA0-5529-80E7D94675A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{667BC5B1-2D4C-0FA0-5529-80E7D94675A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{667BC5B1-2D4C-0FA0-5529-80E7D94675A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0A4E1E8-495F-64BA-6AA2-1B1A7D4D3C80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0A4E1E8-495F-64BA-6AA2-1B1A7D4D3C80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0A4E1E8-495F-64BA-6AA2-1B1A7D4D3C80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0A4E1E8-495F-64BA-6AA2-1B1A7D4D3C80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F646614B-C752-B29F-B1F1-0DB65175DF8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F646614B-C752-B29F-B1F1-0DB65175DF8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F646614B-C752-B29F-B1F1-0DB65175DF8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F646614B-C752-B29F-B1F1-0DB65175DF8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37045C42-5B93-4D41-CE54-B7EAAD1EDB0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37045C42-5B93-4D41-CE54-B7EAAD1EDB0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37045C42-5B93-4D41-CE54-B7EAAD1EDB0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37045C42-5B93-4D41-CE54-B7EAAD1EDB0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{290B8C22-55F2-7BCD-902B-A841C5AA6066}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{290B8C22-55F2-7BCD-902B-A841C5AA6066}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{290B8C22-55F2-7BCD-902B-A841C5AA6066}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{290B8C22-55F2-7BCD-902B-A841C5AA6066}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {00911976-54FA-4EBB-9AD9-73FCF278F927}
+	EndGlobalSection
+EndGlobal
