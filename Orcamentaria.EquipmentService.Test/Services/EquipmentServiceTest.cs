@@ -42,7 +42,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
         {
             var repositoryResponse = _fixture.CreateEntity(1);
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Setup(r => r.GetByIdAsync(It.Is<long>(p => p == id), It.IsAny<Expression<Func<Equipment, object>>[]>()))
             .ReturnsAsync(repositoryResponse);
 
@@ -51,7 +51,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
             response.Should().NotBeNull();
             response.Should().BeSameAs(repositoryResponse);
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Verify(r => r.GetByIdAsync(It.Is<long>(p => p == id), It.IsAny<Expression<Func<Equipment, object>>[]>()
                 ), Times.Once());
         }
@@ -62,7 +62,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
         {
             var repositoryResponse = (Equipment)null;
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Setup(r => r.GetByIdAsync(It.Is<long>(p => p == id), It.IsAny<Expression<Func<Equipment, object>>[]>()))
             .ReturnsAsync(repositoryResponse);
 
@@ -70,7 +70,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
 
             response.Should().BeNull();
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Verify(r => r.GetByIdAsync(
                     It.Is<long>(p => p == id), It.IsAny<Expression<Func<Equipment, object>>[]>()
                 ), Times.Once());
@@ -82,7 +82,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
         {
             var repositoryResponse = new DatabaseException("Error message database.");
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Setup(r => r.GetByIdAsync(It.Is<long>(p => p == id), It.IsAny<Expression<Func<Equipment, object>>[]>()))
                 .ThrowsAsync(repositoryResponse);
 
@@ -91,7 +91,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
             var exception = await act.Should().ThrowAsync<DatabaseException>();
             exception.Which.ErrorCode.Should().Be((int)ErrorCodeEnum.DatabaseError);
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Verify(r => r.GetByIdAsync(
                     It.Is<long>(p => p == id), It.IsAny<Expression<Func<Equipment, object>>[]>()
                 ), Times.Once());
@@ -114,7 +114,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
 
             var mapperResponseDTOResponse = new EquipmentResponseDTO();
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Setup(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<Equipment, object>>[]>()))
                 .ReturnsAsync(repositoryResponse);
 
@@ -129,7 +129,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
             response.Error.Should().BeNull();
             response.Data.Should().NotBeNull();
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                .Verify(r => r.GetAsync(It.Is<GridParams>(p => p == gridParams), It.IsAny<Expression<Func<Equipment, object>>[]>()), Times.Once());
 
             _mocker.GetMock<IMapper>()
@@ -145,7 +145,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
                 new ResponsePagination(1, 10, 0)
                 );
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Setup(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<Equipment, object>>[]>()))
                 .ReturnsAsync(repositoryResponse);
 
@@ -154,7 +154,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
             var exception = await act.Should().ThrowAsync<InfoException>();
             exception.Which.ErrorCode.Should().Be((int)ErrorCodeEnum.NotFound);
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Verify(r => r.GetAsync(It.Is<GridParams>(p => p == gridParams), It.IsAny<Expression<Func<Equipment, object>>[]>()), Times.Once);
 
             _mocker.GetMock<IMapper>()
@@ -168,7 +168,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
             var gridParams = _fixture.CreateGridParamsWithOneFilter(new FilterParam { Field = field, Operator = op, Value = value });;
             var repositoryResponse = new DatabaseException("Error message database.");
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Setup(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<Equipment, object>>[]>()))
                 .ThrowsAsync(repositoryResponse);
 
@@ -177,7 +177,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
             var exception = await act.Should().ThrowAsync<DatabaseException>();
             exception.Which.ErrorCode.Should().Be((int)ErrorCodeEnum.DatabaseError);
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Verify(r => r.GetAsync(It.Is<GridParams>(p => p == gridParams), It.IsAny<Expression<Func<Equipment, object>>[]>()), Times.Once());
 
             _mocker.GetMock<IMapper>()
@@ -205,7 +205,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
                 .Setup(r => r.ValidateBeforeInsert(It.IsAny<Equipment>()))
                 .Returns(validationResponse);
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Setup(r => r.InsertAsync(It.IsAny<Equipment>()))
                 .ReturnsAsync(repositoryResponse);
 
@@ -226,7 +226,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
             _mocker.GetMock<IValidatorEntity<Equipment>>()
                 .Verify(r => r.ValidateBeforeInsert(It.IsAny<Equipment>()), Times.Once());
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                .Verify(r => r.InsertAsync(It.IsAny<Equipment>()), Times.Once());
 
             _mocker.GetMock<IMapper>()
@@ -262,7 +262,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
             _mocker.GetMock<IValidatorEntity<Equipment>>()
                 .Verify(r => r.ValidateBeforeInsert(It.IsAny<Equipment>()), Times.Once());
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                .Verify(r => r.InsertAsync(It.IsAny<Equipment>()), Times.Never());
 
             _mocker.GetMock<IMapper>()
@@ -285,7 +285,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
                 .Setup(r => r.ValidateBeforeInsert(It.IsAny<Equipment>()))
                 .Returns(validationResponse);
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Setup(r => r.InsertAsync(It.IsAny<Equipment>()))
                 .ThrowsAsync(repositoryResponse);
 
@@ -300,7 +300,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
             _mocker.GetMock<IValidatorEntity<Equipment>>()
                 .Verify(r => r.ValidateBeforeInsert(It.IsAny<Equipment>()), Times.Once());
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                .Verify(r => r.InsertAsync(It.IsAny<Equipment>()), Times.Once());
 
             _mocker.GetMock<IMapper>()
@@ -331,7 +331,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
                 .Setup(r => r.ValidateBeforeUpdate(It.IsAny<Equipment>()))
                 .Returns(validationResponse);
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Setup(r => r.UpdateAsync(It.IsAny<long>(),It.IsAny<Equipment>()))
                 .ReturnsAsync(repositoryResponse);
 
@@ -352,7 +352,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
             _mocker.GetMock<IValidatorEntity<Equipment>>()
                 .Verify(r => r.ValidateBeforeUpdate(It.IsAny<Equipment>()), Times.Once());
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                .Verify(r => r.UpdateAsync(It.Is<long>(p => p == id), It.IsAny<Equipment>()), Times.Once());
 
             _mocker.GetMock<IMapper>()
@@ -391,7 +391,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
             _mocker.GetMock<IValidatorEntity<Equipment>>()
                 .Verify(r => r.ValidateBeforeUpdate(It.IsAny<Equipment>()), Times.Once());
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                .Verify(r => r.UpdateAsync(It.Is<long>(p => p == id), It.IsAny<Equipment>()), Times.Never());
 
             _mocker.GetMock<IMapper>()
@@ -428,7 +428,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
             _mocker.GetMock<IValidatorEntity<Equipment>>()
                 .Verify(r => r.ValidateBeforeUpdate(It.IsAny<Equipment>()), Times.Once());
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                .Verify(r => r.UpdateAsync(It.Is<long>(p => p == id), It.IsAny<Equipment>()), Times.Never());
 
             _mocker.GetMock<IMapper>()
@@ -452,7 +452,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
                 .Setup(r => r.ValidateBeforeUpdate(It.IsAny<Equipment>()))
                 .Returns(validationResponse);
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Setup(r => r.UpdateAsync(It.IsAny<long>(), It.IsAny<Equipment>()))
                 .ThrowsAsync(repositoryResponse);
 
@@ -467,7 +467,7 @@ namespace Orcamentaria.EquipmentService.Test.Services
             _mocker.GetMock<IValidatorEntity<Equipment>>()
                 .Verify(r => r.ValidateBeforeUpdate(It.IsAny<Equipment>()), Times.Once());
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                .Verify(r => r.UpdateAsync(It.Is<long>(p => p == id), It.IsAny<Equipment>()), Times.Once());
 
             _mocker.GetMock<IMapper>()

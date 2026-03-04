@@ -36,7 +36,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
                 new ResponsePagination(1, 10, 0)
                 );
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Setup(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                 .ReturnsAsync(repositoryResponse);
 
@@ -45,7 +45,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             result.IsValid.Should().BeTrue();
             result.Errors.Should().BeEmpty();
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Verify(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                 ), Times.Once());
         }
@@ -59,7 +59,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
                 new ResponsePagination(1, 10, 0)
                 );
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Setup(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                 .ReturnsAsync(repositoryResponse);
 
@@ -69,7 +69,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             result.Errors.Should().HaveCountGreaterThan(0);
             result.Errors.Should().Contain(x => x.ErrorMessage == "Esse tipo já existe.");
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Verify(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                 ), Times.Once());
         }
@@ -83,7 +83,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
                 new ResponsePagination(1, 10, 0)
                 );
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Setup(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                 .ReturnsAsync(repositoryResponse);
 
@@ -93,7 +93,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             result.Errors.Should().HaveCountGreaterThan(0);
             result.Errors.Should().Contain(x => x.ErrorMessage == "O Id não deve ser informado.");
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Verify(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                 ), Times.Once());
         }
@@ -109,7 +109,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
 
             entity.Name = string.Empty;
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Setup(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                 .ReturnsAsync(repositoryResponse);
 
@@ -119,7 +119,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             result.Errors.Should().HaveCountGreaterThan(0);
             result.Errors.Should().Contain(x => x.ErrorMessage == "O Name é obrigatório.");
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Verify(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                 ), Times.Once());
         }
@@ -135,7 +135,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
 
             entity.Name = null;
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Setup(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                 .ReturnsAsync(repositoryResponse);
 
@@ -145,7 +145,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             result.Errors.Should().HaveCountGreaterThan(0);
             result.Errors.Should().Contain(x => x.ErrorMessage == "O Name é obrigatório.");
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Verify(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                 ), Times.Once());
         }
@@ -161,7 +161,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
 
             entity.Name = _fixture.Faker.Random.AlphaNumeric(41);
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Setup(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                 .ReturnsAsync(repositoryResponse);
 
@@ -171,7 +171,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             result.Errors.Should().HaveCountGreaterThan(0);
             result.Errors.Should().Contain(x => x.ErrorMessage == "O tamanho máximo do Name é de 40 caracteres.");
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Verify(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                 ), Times.Once());
         }
@@ -187,11 +187,11 @@ namespace Orcamentaria.EquipmentService.Test.Validators
                 new ResponsePagination(1, 10, 0)
                 );
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Setup(r => r.GetByIdAsync(It.IsAny<long>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                 .ReturnsAsync(entity);
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Setup(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                 .ReturnsAsync(repositoryResponse);
 
@@ -200,11 +200,11 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             result.IsValid.Should().BeTrue();
             result.Errors.Should().BeEmpty();
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                .Verify(r => r.GetByIdAsync(It.IsAny<long>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                 ), Times.Once());
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Verify(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                 ), Times.Once());
         }
@@ -218,7 +218,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
                 new ResponsePagination(1, 10, 0)
                 );
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Setup(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                 .ReturnsAsync(repositoryResponse);
 
@@ -228,11 +228,11 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             result.Errors.Should().HaveCountGreaterThan(0);
             result.Errors.Should().Contain(x => x.ErrorMessage == "O Id deve ser informado.");
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
               .Verify(r => r.GetByIdAsync(It.IsAny<long>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                ), Times.Once());
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Verify(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                 ), Times.Once());
         }
@@ -246,11 +246,11 @@ namespace Orcamentaria.EquipmentService.Test.Validators
                 new ResponsePagination(1, 10, 0)
                 );
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Setup(r => r.GetByIdAsync(It.IsAny<long>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                 .ReturnsAsync((EquipmentType)null);
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Setup(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                 .ReturnsAsync(repositoryResponse);
 
@@ -260,11 +260,11 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             result.Errors.Should().HaveCountGreaterThan(0);
             result.Errors.Should().Contain(x => x.ErrorMessage == "Id não encontrado.");
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
               .Verify(r => r.GetByIdAsync(It.IsAny<long>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                ), Times.Once());
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Verify(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                 ), Times.Once());
         }
@@ -278,7 +278,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
                 new ResponsePagination(1, 10, 0)
                 );
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Setup(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                 .ReturnsAsync(repositoryResponse);
 
@@ -288,11 +288,11 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             result.Errors.Should().HaveCountGreaterThan(0);
             result.Errors.Should().Contain(x => x.ErrorMessage == "Esse tipo já existe.");
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
               .Verify(r => r.GetByIdAsync(It.IsAny<long>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                ), Times.Once());
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Verify(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                 ), Times.Once());
         }
@@ -306,11 +306,11 @@ namespace Orcamentaria.EquipmentService.Test.Validators
                 new ResponsePagination(1, 10, 0)
                 );
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Setup(r => r.GetByIdAsync(It.IsAny<long>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                 .ReturnsAsync(entity);
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Setup(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                 .ReturnsAsync(repositoryResponse);
 
@@ -319,11 +319,11 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             result.IsValid.Should().BeTrue();
             result.Errors.Should().BeEmpty();
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
               .Verify(r => r.GetByIdAsync(It.IsAny<long>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                ), Times.Once());
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Verify(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                 ), Times.Once());
         }
@@ -340,11 +340,11 @@ namespace Orcamentaria.EquipmentService.Test.Validators
 
             entity.Name = string.Empty;
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Setup(r => r.GetByIdAsync(It.IsAny<long>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                 .ReturnsAsync(entity);
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Setup(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                 .ReturnsAsync(repositoryResponse);
 
@@ -354,11 +354,11 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             result.Errors.Should().HaveCountGreaterThan(0);
             result.Errors.Should().Contain(x => x.ErrorMessage == "O Name é obrigatório.");
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
               .Verify(r => r.GetByIdAsync(It.IsAny<long>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                ), Times.Once());
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Verify(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                 ), Times.Once());
         }
@@ -374,11 +374,11 @@ namespace Orcamentaria.EquipmentService.Test.Validators
 
             entity.Name = null;
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                .Setup(r => r.GetByIdAsync(It.IsAny<long>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                .ReturnsAsync(entity);
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Setup(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                 .ReturnsAsync(repositoryResponse);
 
@@ -388,11 +388,11 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             result.Errors.Should().HaveCountGreaterThan(0);
             result.Errors.Should().Contain(x => x.ErrorMessage == "O Name é obrigatório.");
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
              .Verify(r => r.GetByIdAsync(It.IsAny<long>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
               ), Times.Once());
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Verify(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                 ), Times.Once());
         }
@@ -408,11 +408,11 @@ namespace Orcamentaria.EquipmentService.Test.Validators
 
             entity.Name = _fixture.Faker.Random.AlphaNumeric(41);
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                .Setup(r => r.GetByIdAsync(It.IsAny<long>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                .ReturnsAsync(entity);
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Setup(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()))
                 .ReturnsAsync(repositoryResponse);
 
@@ -422,11 +422,11 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             result.Errors.Should().HaveCountGreaterThan(0);
             result.Errors.Should().Contain(x => x.ErrorMessage == "O tamanho máximo do Name é de 40 caracteres.");
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
              .Verify(r => r.GetByIdAsync(It.IsAny<long>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
               ), Times.Once());
 
-            _mocker.GetMock<IEquipmentTypeRepository>()
+            _mocker.GetMock<IEquipmentTypeRepository<EquipmentType>>()
                 .Verify(r => r.GetAsync(It.IsAny<GridParams>(), It.IsAny<Expression<Func<EquipmentType, object>>[]>()
                 ), Times.Once());
         }

@@ -6,10 +6,7 @@ namespace Orcamentaria.EquipmentService.Infrastructure.Contexts
 {
     public class MySqlContext : DbContext
     {
-        public MySqlContext(DbContextOptions<MySqlContext> options)
-        : base(options)
-        {
-        }
+        public MySqlContext(DbContextOptions<DbContext> options) : base(options) { }
 
         public DbSet<Equipment> Equipments { get; set; }
         public DbSet<EquipmentType> EquipmentTypes { get; set; }

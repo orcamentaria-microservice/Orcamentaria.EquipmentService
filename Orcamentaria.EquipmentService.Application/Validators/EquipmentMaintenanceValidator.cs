@@ -10,11 +10,11 @@ namespace Orcamentaria.EquipmentService.Application.Validators
 {
     public class EquipmentMaintenanceValidator : AbstractValidator<EquipmentMaintenance>, IValidatorEntity<EquipmentMaintenance>
     {
-        private readonly IEquipmentTypeRepository _repository;
+        private readonly IEquipmentTypeRepository<EquipmentType> _repository;
         private readonly IEquipmentInternalService _equipmentInternalService;
 
         public EquipmentMaintenanceValidator(
-            IEquipmentTypeRepository repository,
+            IEquipmentTypeRepository<EquipmentType> repository,
             IEquipmentInternalService equipmentInternalService)
         {
             _repository = repository;

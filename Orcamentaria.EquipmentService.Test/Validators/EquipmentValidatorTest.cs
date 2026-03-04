@@ -189,7 +189,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
         {
             var entity = _fixture.CreateEntity(1);
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Setup(r => r.GetByIdAsync(It.IsAny<long>()))
                 .ReturnsAsync(entity);
 
@@ -202,7 +202,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             result.IsValid.Should().BeTrue();
             result.Errors.Should().BeEmpty();
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Verify(r => r.GetByIdAsync(It.IsAny<long>()), Times.Once());
 
             _mocker.GetMock<IEquipmentTypeInternalService>()
@@ -214,7 +214,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
         {
             var entity = _fixture.CreateEntity(0);
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Setup(r => r.GetByIdAsync(It.IsAny<long>()))
                 .ReturnsAsync((Equipment)null);
 
@@ -227,7 +227,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             result.IsValid.Should().BeFalse();
             result.Errors.Should().Contain(x => x.ErrorMessage == "O Id deve ser informado.");
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Verify(r => r.GetByIdAsync(It.IsAny<long>()), Times.Once());
 
             _mocker.GetMock<IEquipmentTypeInternalService>()
@@ -240,7 +240,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             var entity = _fixture.CreateEntity(52);
             entity.Id = 52;
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Setup(r => r.GetByIdAsync(It.IsAny<long>()))
                 .ReturnsAsync((Equipment)null);
 
@@ -253,7 +253,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             result.IsValid.Should().BeFalse();
             result.Errors.Should().Contain(x => x.ErrorMessage == "Id não encontrado.");
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Verify(r => r.GetByIdAsync(It.IsAny<long>()), Times.Once());
 
             _mocker.GetMock<IEquipmentTypeInternalService>()
@@ -267,7 +267,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             entity.Id = 1;
             entity.TypeId = 999;
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Setup(r => r.GetByIdAsync(It.IsAny<long>()))
                 .ReturnsAsync(entity);
 
@@ -280,7 +280,7 @@ namespace Orcamentaria.EquipmentService.Test.Validators
             result.IsValid.Should().BeFalse();
             result.Errors.Should().Contain(x => x.ErrorMessage == "O tipo informado não existe.");
 
-            _mocker.GetMock<IEquipmentRepository>()
+            _mocker.GetMock<IEquipmentRepository<Equipment>>()
                 .Verify(r => r.GetByIdAsync(It.IsAny<long>()), Times.Once());
 
             _mocker.GetMock<IEquipmentTypeInternalService>()

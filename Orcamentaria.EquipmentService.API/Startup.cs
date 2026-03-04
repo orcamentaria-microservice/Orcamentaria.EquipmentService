@@ -44,9 +44,9 @@ namespace Orcamentaria.EquipmentService.API
                         typeof(EquipmentMaintenanceMapper));
 
                     //Repositories
-                    services.AddScoped<IEquipmentRepository, EquipmentRespository>();
-                    services.AddScoped<IEquipmentTypeRepository, EquipmentTypeRespository>();
-                    services.AddScoped<IEquipmentMaintenanceRepository, EquipmentMaintenanceRespository>();
+                    services.AddScoped<IEquipmentRepository<Equipment>, EquipmentRespository>();
+                    services.AddScoped<IEquipmentTypeRepository<EquipmentType>, EquipmentTypeRespository>();
+                    services.AddScoped<IEquipmentMaintenanceRepository<EquipmentMaintenance>, EquipmentMaintenanceRespository>();
 
                     //Services
                     services.AddScoped<IEquipmentService, Application.Services.EquipmentService>();

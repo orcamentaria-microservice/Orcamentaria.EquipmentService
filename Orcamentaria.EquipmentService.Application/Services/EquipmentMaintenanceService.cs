@@ -14,12 +14,12 @@ namespace Orcamentaria.EquipmentService.Application.Services
 {
     public class EquipmentMaintenanceService : IEquipmentMaintenanceService
     {
-        private readonly IEquipmentMaintenanceRepository _repository;
+        private readonly IEquipmentMaintenanceRepository<EquipmentMaintenance> _repository;
         private readonly IValidatorEntity<EquipmentMaintenance> _validator;
         private readonly IMapper _mapper;
 
         public EquipmentMaintenanceService(
-            IEquipmentMaintenanceRepository repository,
+            IEquipmentMaintenanceRepository<EquipmentMaintenance> repository,
             IValidatorEntity<EquipmentMaintenance> validator,
             IMapper mapper)
         {

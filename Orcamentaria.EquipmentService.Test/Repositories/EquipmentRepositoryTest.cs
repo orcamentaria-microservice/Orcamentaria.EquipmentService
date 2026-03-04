@@ -1,16 +1,20 @@
 ﻿using Orcamentaria.EquipmentService.Domain.Models;
 using Orcamentaria.EquipmentService.Test.Contexts;
 using Orcamentaria.EquipmentService.Test.Fixtures;
+using Orcamentaria.Lib.Test.Repositories;
 using Xunit;
 
 namespace Orcamentaria.EquipmentService.Test.Repositories
 {
     [Collection(nameof(EquipmentCollection))]
-    public class EquipmentRepositoryTest : BasicRepositoryTest<Equipment, MySqlContextTest>
+    public class EquipmentReadRepositoryTest : ReadWithCompanyRepositoryTests<Equipment, MySqlContextTest>
     {
-        
-        public EquipmentRepositoryTest(EquipmentFixture fixture) : base(fixture)
-        {
-        }
+        public EquipmentReadRepositoryTest(EquipmentFixture fixture) : base(fixture) { }
+    }
+
+    [Collection(nameof(EquipmentCollection))]
+    public class EquipmentWriteRepositoryTest : WriteWithCompanyRepositoryTests<Equipment, MySqlContextTest>
+    {
+        public EquipmentWriteRepositoryTest(EquipmentFixture fixture) : base(fixture) { }
     }
 }

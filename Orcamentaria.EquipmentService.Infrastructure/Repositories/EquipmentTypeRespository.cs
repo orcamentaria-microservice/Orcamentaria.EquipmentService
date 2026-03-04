@@ -6,7 +6,7 @@ using Orcamentaria.Lib.Infrastructure.Repositories;
 
 namespace Orcamentaria.EquipmentService.Infrastructure.Repositories
 {
-    public class EquipmentTypeRespository : BaseRepository<EquipmentType>, IEquipmentTypeRepository
+    public class EquipmentTypeRespository : BaseRepository<EquipmentType>, IEquipmentTypeRepository<EquipmentType>
     {
         public EquipmentTypeRespository(
             MySqlContext context, 

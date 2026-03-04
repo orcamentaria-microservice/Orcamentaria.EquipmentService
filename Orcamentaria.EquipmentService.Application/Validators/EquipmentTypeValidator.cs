@@ -9,9 +9,9 @@ namespace Orcamentaria.EquipmentService.Application.Validators
 {
     public class EquipmentTypeValidator : AbstractValidator<EquipmentType>, IValidatorEntity<EquipmentType>
     {
-        private readonly IEquipmentTypeRepository _repository;
+        private readonly IEquipmentTypeRepository<EquipmentType> _repository;
 
-        public EquipmentTypeValidator(IEquipmentTypeRepository repository)
+        public EquipmentTypeValidator(IEquipmentTypeRepository<EquipmentType> repository)
         {
             _repository = repository;
         }
