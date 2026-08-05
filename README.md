@@ -148,7 +148,7 @@ A aplicação usa o modelo padrão de configuração do ASP.NET Core (`appsettin
 }
 ```
 
-O arquivo também define um segredo de bootstrap consumido internamente por `Orcamentaria.Lib.Infrastructure` (`ResolveConfigs`) para autenticar o serviço junto à infraestrutura compartilhada de configuração — seu valor não é reproduzido aqui.
+O arquivo também define um segredo de bootstrap consumido internamente por `Orcamentaria.Lib.Infrastructure` (`ResolveConfigs`) para autenticar o serviço e buscar, no `Orcamentaria.ConfigBagService`, o restante das suas configurações (connection string do MySQL, `ServiceRegistryConfiguration`, `MessageBrokerConfiguration`, `ServiceConfiguration`) — seu valor não é reproduzido aqui. `ApiGetawayConfiguration.BaseUrl` e o segredo de bootstrap são as únicas exceções que ficam no `appsettings.json` local, por serem necessários para localizar o Gateway e se autenticar antes dessa busca.
 
 **`Orcamentaria.EquipmentService.API/appsettings.Development.json`:** contém overrides de `Logging` para o ambiente de desenvolvimento.
 
@@ -250,7 +250,8 @@ Todas as respostas de sucesso são encapsuladas em `Response<T>` (dado + pagina�
 | Integração | Descrição |
 |---|---|
 | **Service Registry** | O serviço se registra na inicialização via `AddServiceRegistryHosted`, permitindo que seja descoberto e roteado pelo API Gateway. |
-| **API Gateway (`Orcamentaria.APIGetaway`)** | Endereço configurado em `ApiGetawayConfiguration:BaseUrl`; é a via padrão de acesso externo aos endpoints deste serviço. |
+| **API Gateway (`Orcamentaria.APIGetaway`)** | Endereço configurado em `ApiGetawayConfiguration:BaseUrl`; é a via padrão de acesso externo aos endpoints deste serviço e o intermediário para a busca de configuração remota. |
+| **ConfigBagService** | Fonte centralizada da configuração do serviço (connection string, Service Registry, mensageria), buscada via API Gateway durante o bootstrap. |
 | **MySQL** | Banco de dados relacional do serviço, acessado via EF Core. |
 
 ---
